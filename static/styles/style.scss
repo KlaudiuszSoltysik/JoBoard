@@ -1,0 +1,24 @@
+$beige: #dce2df;
+$blue-1: #d8e8e8;
+$blue-2: #a7d0da;
+$blue-3: #406d96;
+$blue-4: #2f3a56;
+$red: #e2474b;
+
+.navbar {
+    .nav-item {
+        font-size: 1.5em !important;
+    }
+    .nav-link {
+        color: black !important;
+    }
+    .navbar-brand {
+        font-size: 2em !important;
+        background: linear-gradient(to right, $red, $blue-4); 
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        img {
+            height: 2em;
+        }
+    }
+}

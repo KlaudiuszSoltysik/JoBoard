@@ -1,0 +1,15 @@
+.navbar .nav-item {
+  font-size: 1.5em !important;
+}
+.navbar .nav-link {
+  color: black !important;
+}
+.navbar .navbar-brand {
+  font-size: 2em !important;
+  background: linear-gradient(to right, #e2474b, #2f3a56);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.navbar .navbar-brand img {
+  height: 2em;
+}/*# sourceMappingURL=style.css.map */
