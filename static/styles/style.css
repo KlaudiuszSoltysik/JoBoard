@@ -1,3 +1,10 @@
+.navbar {
+  --bs-navbar-padding-x: 0;
+  --bs-navbar-padding-y: 0 !important;
+}
+.navbar .container-fluid {
+  background-color: #dce2df;
+}
 .navbar .nav-item {
   font-size: 1.5em !important;
 }
@@ -12,4 +19,35 @@
 }
 .navbar .navbar-brand img {
   height: 2em;
+}
+
+.footer {
+  background-color: #dce2df;
+}
+.footer .container-fluid {
+  text-align: center;
+}
+.footer svg {
+  height: 8em;
+  padding: 2em;
+}
+
+a:link {
+  color: #2f3a56;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #406d96;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2f3a56 !important;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #406d96 !important;
+  text-decoration: underline;
 }/*# sourceMappingURL=style.css.map */

@@ -5,7 +5,13 @@ $blue-3: #406d96;
 $blue-4: #2f3a56;
 $red: #e2474b;
 
+// MAIN
 .navbar {
+    --bs-navbar-padding-x: 0;
+    --bs-navbar-padding-y: 0 !important;
+    .container-fluid {
+        background-color: $beige;
+    }
     .nav-item {
         font-size: 1.5em !important;
     }
@@ -21,4 +27,30 @@ $red: #e2474b;
             height: 2em;
         }
     }
+}
+.footer {
+    background-color: $beige;
+    .container-fluid {
+        text-align: center;
+    }
+    svg {
+        height: 8em;
+        padding: 2em;
+    }
+}
+
+// HOME
+#home {
+  a:link {
+    color: $blue-4;
+    text-decoration: none;
+  }
+  a:visited {
+    color: $blue-3;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $blue-4 !important;
+    text-decoration: underline;
+  }
 }
