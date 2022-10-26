@@ -1,3 +1,17 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dce2df;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2f3a56;
+  border-radius: 10px;
+}
+
 .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0 !important;
@@ -7,6 +21,7 @@
 }
 .navbar .nav-item {
   font-size: 1.5em !important;
+  padding-left: 1em;
 }
 .navbar .nav-link {
   color: black !important;
@@ -23,31 +38,83 @@
 
 .footer {
   background-color: #dce2df;
+  padding-bottom: 1em !important;
+}
+.footer .row {
+  margin: 0;
 }
 .footer .container-fluid {
   text-align: center;
+}
+.footer p {
+  margin: 0;
+  text-align: center;
+}
+.footer a {
+  text-decoration: none !important;
 }
 .footer svg {
   height: 8em;
   padding: 2em;
 }
 
-a:link {
-  color: #2f3a56;
+#home .statistics {
+  padding-left: 8em;
+  padding-right: 8em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  background-color: #406d96;
+}
+#home .statistics h2 {
+  text-align: center;
+}
+#home .news {
+  padding-left: 8em;
+  padding-right: 8em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  background-color: #a7d0da;
+}
+#home h2 {
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+#home h3 {
+  padding-bottom: 1em;
+  padding-top: 1em;
+  text-align: center;
+}
+#home a:link {
+  color: black;
   text-decoration: none;
 }
-
-a:visited {
+#home a:visited {
   color: #406d96;
   text-decoration: none;
 }
-
-a:hover {
-  color: #2f3a56 !important;
+#home a:hover {
+  color: #406d96 !important;
   text-decoration: underline;
 }
 
-a:active {
-  color: #406d96 !important;
-  text-decoration: underline;
+#sign-up h1,
+#sign-in h1 {
+  padding-bottom: 0.5em;
+}
+#sign-up .btn,
+#sign-in .btn {
+  background-color: #406d96;
+  --bs-btn-font-size: 2em;
+  --bs-btn-padding-x: 1em;
+}
+#sign-up .container-fluid,
+#sign-in .container-fluid {
+  background-image: linear-gradient(#dce2df, #406d96, #dce2df);
+}
+#sign-up .container,
+#sign-in .container {
+  text-align: center;
+  border-radius: 1em;
+  background-color: #dce2df;
+  width: 40em;
 }/*# sourceMappingURL=style.css.map */

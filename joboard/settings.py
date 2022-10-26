@@ -5,7 +5,6 @@ SECRET_KEY = 'django-insecure-bk5sx)l@!*)03$4m&fzz7@d36lq%6zfzl%uy-_6qoa_7v+01iu
 DEBUG = True
 ALLOWED_HOSTS = []
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -13,6 +12,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'base.apps.BaseConfig'
 ]
 
 MIDDLEWARE = [

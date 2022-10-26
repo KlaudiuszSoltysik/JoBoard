@@ -1,21 +1,31 @@
 {% extends 'main.html' %}
 
-  {% block content %}
-  <section id="home"
-    <div class="container-fluid">
-      <h2>SOME STATISTICS:</h2>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12"><h3>REGISTERED USERS</h3></div>
-        <div class="col-lg-4 col-md-6 col-sm-12"><h3>OFFERS</h3></div>
-        <div class="col-lg-4 col-md-6 col-sm-12"><h3>REGISTERED COMPANIES</h3></div>
-      </div>
+{% block content %}
+<section id="home">
 
+  <div class="statistics">
+    <h2>SOME STATISTICS</h2>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <h3>REGISTERED USERS</h3>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <h3>OFFERS</h3>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <h3>REGISTERED COMPANIES</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="news">
     <h2>BUSINESS NEWS:</h2>
     {% for x in response %}
-      <p><a href="{{ x.url }}">{{ x.title }}</a></p>
+    <p><a href="{{ x.url }}">{{ x.title }}</a></p>
     {% endfor %}
+  </div>
 
-    </div>
-  </section>
-  
-  {% endblock %}
+
+</section>
+
+{% endblock %}
