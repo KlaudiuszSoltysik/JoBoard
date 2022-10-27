@@ -43,11 +43,11 @@
 .footer .row {
   margin: 0;
 }
-.footer .container-fluid {
-  text-align: center;
-}
 .footer p {
   margin: 0;
+  text-align: center;
+}
+.footer h5 {
   text-align: center;
 }
 .footer a {
@@ -100,6 +100,25 @@
 #sign-up h1,
 #sign-in h1 {
   padding-bottom: 0.5em;
+}
+#sign-up h5,
+#sign-in h5 {
+  margin-top: 1em;
+  text-align: left;
+}
+#sign-up a,
+#sign-in a {
+  color: black;
+}
+#sign-up img,
+#sign-in img {
+  margin-left: 1em;
+  margin-right: 1em;
+  height: 5em;
+}
+#sign-up hr,
+#sign-in hr {
+  margin: 2em;
 }
 #sign-up .btn,
 #sign-in .btn {

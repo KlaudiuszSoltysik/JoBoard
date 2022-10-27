@@ -58,12 +58,12 @@ $red: #e2474b;
     margin: 0;
   }
 
-  .container-fluid {
+  p {
+    margin: 0;
     text-align: center;
   }
 
-  p {
-    margin: 0;
+  h5 {
     text-align: center;
   }
 
@@ -132,6 +132,25 @@ $red: #e2474b;
     padding-bottom: 0.5em;
   }
 
+  h5 {
+    margin-top: 1em;
+    text-align: left;
+  }
+
+  a {
+    color: black;
+  }
+
+  img {
+    margin-left: 1em;
+    margin-right: 1em;
+    height: 5em;
+  }
+
+  hr {
+    margin: 2em;
+  }
+
   .btn {
     background-color: $blue-3;
     --bs-btn-font-size: 2em;
@@ -148,4 +167,8 @@ $red: #e2474b;
     background-color: $beige;
     width: 40em;
   }
+}
+
+#offers {
+  
 }

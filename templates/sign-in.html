@@ -1,6 +1,7 @@
 {% extends 'main.html' %}
 
 {% block content %}
+{% load static %}
 
 <section id="sign-in">
   <div class="container-fluid py-5">
@@ -13,7 +14,9 @@
         <input type="password" class="form-control" placeholder="Password">
       </div>
       <input class="btn login_btn" type="submit" value="Sign in">
-    </div>
+      <hr>
+      <p><img src="{% static 'images/google-logo.png' %}"><img src="{% static 'images/facebook-logo.png' %}"></p>
+      </div>
   </div>
 </section>
 

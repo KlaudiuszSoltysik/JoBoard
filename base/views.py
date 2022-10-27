@@ -11,12 +11,16 @@ def home(request):
     
     return render(request, 'home.html', {'response': response[0:5]})
 
+def offers(request):   
+    return render(request, 'offers.html')
+
 def signUp(request):
     form = CreateUserForm()
     context = {'form': form}
     
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
+        print(form.errors)
         if form.is_valid():
             form.save()
     
