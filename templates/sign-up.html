@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -9,10 +10,8 @@
       <div class="form-group">
         <form action="" method="POST">
           {% csrf_token %}
-          {{ form.username}}
-          {{ form.email}}
-          {{ form.password1}}
-          <input class="btn login_btn" type="submit" value="Sign up">
+          {{ form|crispy }}
+          <input class="btn login_btn" type="submit" value="Sign up" style="margin-top: 1em;">
         </form>
       </div>
       <h5>Already signed up? <a href="{% url 'signIn' %}">Sign in insted</a></h5>
