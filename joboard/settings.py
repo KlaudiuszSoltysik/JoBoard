@@ -12,8 +12,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base.apps.BaseConfig',
-    'crispy_forms'
+    'base.apps.BaseConfig'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +69,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 AUTH_USER_MODEL = 'base.MyUser'
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -80,4 +80,3 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
     ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'

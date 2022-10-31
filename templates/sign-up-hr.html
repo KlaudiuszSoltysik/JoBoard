@@ -12,18 +12,16 @@
       {% endfor %}
     {% endif %}
     <div class="container my-5 p-5 m-auto">
-      <h1>Sign up</h1>
+      <h1>Sign up HR account</h1>
       <div class="form-group">
         <form action="" method="POST">
           {% csrf_token %}
           {{ form.email }}
-          {{ form.first_name }}
-          {{ form.last_name }}
+          {{ form.company }}
           {{ form.password }}
           <input class="btn login_btn" type="submit" value="Sign up" style="margin-top: 0.5em;">
         </form>
       </div>
-      <h5>Already signed up? <a href="{% url 'signIn' %}">Sign in insted</a></h5>
     </div>
   </div>
 </section>

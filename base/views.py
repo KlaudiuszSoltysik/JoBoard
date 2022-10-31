@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .forms import MyUserForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import MyUserForm, HRForm
 import requests
 import random
 
@@ -16,6 +17,9 @@ def home(request):
 def offers(request):   
     return render(request, 'offers.html')
 
+def signIn(request):    
+    return render(request, 'sign-in.html')
+
 def signUp(request):
     form = MyUserForm()
     context = {'form': form}
@@ -24,8 +28,22 @@ def signUp(request):
         form = MyUserForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Account created successfully. Sign in to your new account.')
+            return redirect('signIn')
+        # else:
+        #     messages.error(request, )
     
     return render(request, 'sign-up.html', context)
 
-def signIn(request):   
-    return render(request, 'sign-in.html')
+def signUpHR(request):
+    form = HRForm()
+    context = {'form': form}
+    
+    if request.method == 'POST':
+        form = HRForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account created successfully. Sign in to your new account.')
+            return redirect('signIn')
+    
+    return render(request, 'sign-up-hr.html', context)

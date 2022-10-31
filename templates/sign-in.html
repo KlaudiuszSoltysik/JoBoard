@@ -1,17 +1,23 @@
 {% extends 'main.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
 {% load static %}
 
-<section id="sign-in">
+<section id="sign">
   <div class="container-fluid py-5">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
     <div class="container my-5 p-5 m-auto">
       <h1>Sign in</h1>
       <div class="form-group">
         <form action="" method="POST">
           {% csrf_token %}
-          {{ form|crispy }}
+          {{ form }}
           <input class="btn login_btn" type="submit" value="Sign in">
         </form>
         <h5>Forgot password? <a href="{% url 'signIn' %}">Reset</a></h5>

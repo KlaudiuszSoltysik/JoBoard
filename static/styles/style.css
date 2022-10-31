@@ -97,41 +97,33 @@
   text-decoration: underline;
 }
 
-#sign-up h1,
-#sign-in h1 {
+#sign h1 {
   padding-bottom: 0.5em;
 }
-#sign-up h5,
-#sign-in h5 {
+#sign h5 {
   margin-top: 1em;
   text-align: left;
 }
-#sign-up a,
-#sign-in a {
+#sign a {
   color: black;
 }
-#sign-up img,
-#sign-in img {
+#sign img {
   margin-left: 1em;
   margin-right: 1em;
   height: 5em;
 }
-#sign-up hr,
-#sign-in hr {
+#sign hr {
   margin: 2em;
 }
-#sign-up .btn,
-#sign-in .btn {
+#sign .btn {
   background-color: #406d96;
   --bs-btn-font-size: 2em;
   --bs-btn-padding-x: 1em;
 }
-#sign-up .container-fluid,
-#sign-in .container-fluid {
+#sign .container-fluid {
   background-image: linear-gradient(#dce2df, #406d96, #dce2df);
 }
-#sign-up .container,
-#sign-in .container {
+#sign .container {
   text-align: center;
   border-radius: 1em;
   background-color: #dce2df;
