@@ -65,6 +65,10 @@
   padding-top: 1em;
   background-color: #406d96;
 }
+#home .statistics h1 {
+  font-size: 7em !important;
+  text-align: center !important;
+}
 #home .statistics h2 {
   text-align: center;
 }
@@ -115,6 +119,9 @@
 #sign hr {
   margin: 2em;
 }
+#sign .sign-in-images a {
+  text-decoration: none !important;
+}
 #sign .btn {
   background-color: #406d96;
   --bs-btn-font-size: 2em;
@@ -127,5 +134,5 @@
   text-align: center;
   border-radius: 1em;
   background-color: #dce2df;
-  width: 40em;
+  width: 80%;
 }/*# sourceMappingURL=style.css.map */

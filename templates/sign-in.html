@@ -1,30 +1,27 @@
-{% extends 'main.html' %}
-
-{% block content %}
+{% extends 'sign.html' %}
 {% load static %}
+{% block form %}
 
-<section id="sign">
-  <div class="container-fluid py-5">
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
-          {{ message }}
-        </div>
-      {% endfor %}
-    {% endif %}
-    <div class="container my-5 p-5 m-auto">
-      <h1>Sign in</h1>
-      <div class="form-group">
-        <form action="" method="POST">
-          {% csrf_token %}
-          {{ form }}
-          <input class="btn login_btn" type="submit" value="Sign in">
-        </form>
-        <h5>Forgot password? <a href="{% url 'signIn' %}">Reset</a></h5>
-      <hr>
-      <p><img src="{% static 'images/google-logo.png' %}"><img src="{% static 'images/facebook-logo.png' %}"></p>
-      </div>
+<h1>Sign in</h1>
+<div class="form-group">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Email address" class="form-control" autocomplete="off" style="margin-top: 0.4em; margin-bottom: 1em">
+    <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="off" style="margin-top: 0.4em; margin-bottom: 1em">
+    <input class="btn login_btn" type="submit" value="Sign in">
+  </form>
+  <h5>Forgot password? <a href="{% url 'signIn' %}">Reset</a></h5>
+  <hr>
+  <p>
+  <div class="sign-in-images">
+    <a href="{% url 'signIn' %}">
+      <img src="{% static 'images/google-logo.png' %}">
+    </a>
+    <a href="{% url 'signIn' %}">
+      <img src="{% static 'images/facebook-logo.png' %}">
+    </a>
   </div>
-</section>
+  </p>
+</div>
 
 {% endblock %}

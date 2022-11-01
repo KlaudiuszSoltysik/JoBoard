@@ -1,31 +1,17 @@
-{% extends 'main.html' %}
+{% extends 'sign.html' %}
+{% block form %}
 
-{% block content %}
-
-<section id="sign">
-  <div class="container-fluid py-5">
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
-          {{ message }}
-        </div>
-      {% endfor %}
-    {% endif %}
-    <div class="container my-5 p-5 m-auto">
-      <h1>Sign up</h1>
-      <div class="form-group">
-        <form action="" method="POST">
-          {% csrf_token %}
-          {{ form.email }}
-          {{ form.first_name }}
-          {{ form.last_name }}
-          {{ form.password }}
-          <input class="btn login_btn" type="submit" value="Sign up" style="margin-top: 0.5em;">
-        </form>
-      </div>
-      <h5>Already signed up? <a href="{% url 'signIn' %}">Sign in insted</a></h5>
-    </div>
-  </div>
-</section>
+<h1>Sign up</h1>
+<div class="form-group">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Email address" class="form-control" autocomplete="off" style="margin-top: 0.4em; margin-bottom: 1em">
+    <input type="text" name="first_name" placeholder="First name" class="form-control" autocomplete="off" style="margin-top: 0.4em; margin-bottom: 1em">
+    <input type="text" name="last_name" placeholder="Last name" class="form-control" autocomplete="off" style="margin-top: 0.4em; margin-bottom: 1em">
+    <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="off" style="margin-top: 0.4em; margin-bottom: 1em">
+    <input class="btn login_btn" type="submit" value="Sign up" style="margin-top: 0.5em;">
+  </form>
+</div>
+<h5>Already signed up? <a href="{% url 'signIn' %}">Sign in insted</a></h5>
 
 {% endblock %}
