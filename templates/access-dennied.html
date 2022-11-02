@@ -1,0 +1,9 @@
+{% extends 'sign.html' %}
+{% load static %}
+{% block form %}
+
+<h1>Access dennied</h1>
+<h1>You have to be signed in to visit this page.</h1>
+<img src="{% static 'images/key.png' %}" style="width: 30%; height: auto">
+
+{% endblock %}

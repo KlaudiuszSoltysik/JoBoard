@@ -1,49 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
-
-class MyUserAccountManager(BaseUserManager):
-    def create_superuser(self, email, first_name, last_name, password, **other_fields):
-        other_fields.setdefault('is_staff', True)
-        other_fields.setdefault('is_superuser', True)
-        other_fields.setdefault('is_active', True)
-
-        if other_fields.get('is_staff') is not True:
-            raise ValueError(
-                'Superuser must be assigned to is_staff=True.')
-        if other_fields.get('is_superuser') is not True:
-            raise ValueError(
-                'Superuser must be assigned to is_superuser=True.')
-
-        return self.create_user(email, first_name, last_name, password, **other_fields)
-
-    def create_user(self, email, first_name, last_name, password, **other_fields):
-        if not email or not first_name or not last_name or not password:
-            raise ValueError('You must provide more data.')
-        elif len(password)<8:
-            raise ValueError('Password too short.')
-
-        email = self.normalize_email(email)
-        user = self.model(email=email, first_name=first_name, last_name=last_name, **other_fields)
-        user.set_password(password)
-        user.save()
-        
-        return user
-    
-
-class HRAccountManager(BaseUserManager):
-    def create_user(self, email, company, password, **other_fields):
-        if not email or not company or not password:
-            raise ValueError('You must provide more data')
-        elif len(password)<8:
-            raise ValueError('Password too short.')
-
-        email = self.normalize_email(email)
-        user = self.model(email=email, company=company, **other_fields)
-        user.set_password(password)
-        user.save()    
-            
-        return user
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from .managers import MyUserAccountManager, HRAccountManager
 
 
 class MyUser(AbstractBaseUser, PermissionsMixin):
@@ -75,3 +32,20 @@ class HR(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+    
+    
+class Offer(models.Model):
+    INDUSTRY_CHOICES = (('IT','IT'),
+                        ('Marketing', 'MARKETING'),
+                        ('Construction','CONSTRUCTION'),
+                        ('Engineering','ENGINEERING'),
+                        ('Education','EDUCATION'),
+                        ('Finance', 'FINANCE'),
+                        ('Health care', 'HEALTH_CARE'),
+                        ('Media', 'MEDIA'))
+    
+    industry = models.CharField('Industry field', max_length=12, choices=INDUSTRY_CHOICES, default='Education')
+    salary = models.IntegerField('Salary', blank=True, null=True)
+    city = models.CharField('City', max_length=30, blank=True, null=True)
+    company = models.CharField('Company name', max_length=50)
+    description = models.CharField('Description', max_length=1000)
