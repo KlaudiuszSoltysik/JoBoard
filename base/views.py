@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib import messages
 from .models import MyUser, HR, Offer
+from .forms import OfferForm
 import requests
 import random
 
@@ -122,13 +122,23 @@ def manageAccount(request):
 
 def addOffer(request):
     global user
+    context = {'form': OfferForm(),
+               'user': user}
     
     if user is None:
         return redirect('accessDennied')
     else:
-        pass
+        if request.method == 'POST':
+            
+            form = OfferForm(request.POST)
+            
+            if form.is_valid():
+                messages.success(request, 'Offer added.')
+                return redirect('offers')
+            else:
+                messages.warning(request, 'Something went wrong.')
     
-    return render(request, 'add-offer.html')
+    return render(request, 'add-offer.html', context)
 
 def signOut(request):
     global user

@@ -36,16 +36,21 @@ class HR(AbstractBaseUser):
     
 class Offer(models.Model):
     INDUSTRY_CHOICES = (('IT','IT'),
-                        ('Marketing', 'MARKETING'),
-                        ('Construction','CONSTRUCTION'),
-                        ('Engineering','ENGINEERING'),
-                        ('Education','EDUCATION'),
-                        ('Finance', 'FINANCE'),
-                        ('Health care', 'HEALTH_CARE'),
-                        ('Media', 'MEDIA'))
+                        ('Marketing', 'Marketing'),
+                        ('Construction','Construction'),
+                        ('Engineering','Engineering'),
+                        ('Education','Education'),
+                        ('Finance', 'Finance'),
+                        ('Health care', 'Health care'),
+                        ('Media', 'Media'))
     
     industry = models.CharField('Industry field', max_length=12, choices=INDUSTRY_CHOICES, default='Education')
     salary = models.IntegerField('Salary', blank=True, null=True)
     city = models.CharField('City', max_length=30, blank=True, null=True)
     company = models.CharField('Company name', max_length=50)
     description = models.CharField('Description', max_length=1000)
+    email = models.EmailField('Email address',  max_length=30)
+    author = models.ForeignKey(HR, on_delete=models.CASCADE)
+
+    def __str__(self):
+            return self.email
