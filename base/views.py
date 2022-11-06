@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib import messages
-from .models import MyUser, HR
+from .models import MyUser, HR, Offer
 import requests
 import random
 
@@ -20,6 +21,7 @@ def home(request):
     context = {'user': user,
                'response': response[0:5],
                'users_count': MyUser.objects.count,
+               'offers_count': Offer.objects.count,
                'companies_count': HR.objects.count}
         
     return render(request, 'home.html', context)
@@ -41,13 +43,11 @@ def signIn(request):
         try:
             user = MyUser.objects.get(email=email)
         except MyUser.DoesNotExist:
-            try:
-                user = HR.objects.get(email=email)
-            except HR.DoesNotExist:
-                user = None
+            user = None
         
         if user is not None:
             if user.check_password(password):
+                messages.success(request, 'Signed in.')
                 return redirect('offers')
             else:
                 messages.warning(request, 'Password is incorrect. Try again or reset password.')
@@ -55,6 +55,29 @@ def signIn(request):
             messages.warning(request, 'Email address is not signed up. Try again or sign up.')
     
     return render(request, 'sign-in.html')
+
+def signInHR(request):
+    global user
+      
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        try:
+            user = HR.objects.get(email=email)
+        except HR.DoesNotExist:
+            user = None
+        
+        if user is not None:
+            if user.check_password(password):
+                messages.success(request, 'Signed in.')
+                return redirect('offers')
+            else:
+                messages.warning(request, 'Password is incorrect. Try again or reset password.')
+        else:
+            messages.warning(request, 'Email address is not signed up. Try again or sign up.')
+    
+    return render(request, 'sign-in-hr.html')
 
 def signUp(request):
     if request.method == 'POST':
@@ -86,6 +109,32 @@ def signUpHR(request):
             messages.warning(request, e)
     
     return render(request, 'sign-up-hr.html')
+
+def manageAccount(request):
+    global user
+    
+    if user is None:
+        return redirect('accessDennied')
+    else:
+        pass
+    
+    return render(request, 'manage-account.html')
+
+def addOffer(request):
+    global user
+    
+    if user is None:
+        return redirect('accessDennied')
+    else:
+        pass
+    
+    return render(request, 'add-offer.html')
+
+def signOut(request):
+    global user
+    user = None
+    
+    return redirect('home')
 
 def accessDennied(request):
     return render(request, 'access-dennied.html')

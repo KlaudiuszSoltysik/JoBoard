@@ -3,7 +3,8 @@
 {% block form %}
 
 <h1>Access dennied</h1>
-<h1>You have to be signed in to visit this page.</h1>
+<h2>You have to be signed in to visit this page.</h2>
+<h3><a href="{% url 'signIn' %}">Sign in.</a></h3>
 <img src="{% static 'images/key.png' %}" style="width: 30%; height: auto">
 
 {% endblock %}

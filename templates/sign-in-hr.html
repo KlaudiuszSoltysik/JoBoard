@@ -1,0 +1,20 @@
+{% extends 'sign.html' %}
+{% load static %}
+{% block form %}
+
+<h1>Sign in as company</h1>
+<div class="form-group">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Email address" class="form-control" autocomplete="off" autofocus
+      style="margin-top: 0.4em; margin-bottom: 1em">
+    <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="off"
+      style="margin-top: 0.4em; margin-bottom: 1em">
+    <input class="btn login_btn" type="submit" value="Sign in">
+  </form>
+  <h5>Forgot password? <a href="{% url 'signIn' %}">Reset</a></h5>
+</div>
+</p>
+</div>
+
+{% endblock %}
