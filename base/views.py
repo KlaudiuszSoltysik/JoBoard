@@ -7,10 +7,11 @@ import random
 
 
 user = None
+is_logged = False
 
 
 def home(request):
-    global user
+    global is_logged
     
     try:
         response = requests.get("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=4e0ad1a0acb34407a06c85ae68a19813").json()['articles']
@@ -18,7 +19,7 @@ def home(request):
     except:
         response = []
         
-    context = {'user': user,
+    context = {'is_logged': is_logged,
                'response': response[0:5],
                'users_count': MyUser.objects.count,
                'offers_count': Offer.objects.count,
@@ -26,16 +27,21 @@ def home(request):
         
     return render(request, 'home.html', context)
 
+
 def offers(request):
-    global user
+    global is_logged
     
-    context = {'user': user}
+    context = {'is_logged': is_logged}
     
     return render(request, 'offers.html', context)
 
+
 def signIn(request):
     global user
-      
+    global is_logged
+    
+    context = {'is_logged': is_logged}
+    
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -47,6 +53,11 @@ def signIn(request):
         
         if user is not None:
             if user.check_password(password):
+                is_logged = True
+                
+                if request.POST.get('remember'):
+                    request.session.set_expiry(1209600)
+                    
                 messages.success(request, 'Signed in.')
                 return redirect('offers')
             else:
@@ -54,10 +65,14 @@ def signIn(request):
         else:
             messages.warning(request, 'Email address is not signed up. Try again or sign up.')
     
-    return render(request, 'sign-in.html')
+    return render(request, 'sign-in.html', context)
+
 
 def signInHR(request):
     global user
+    global is_logged
+    
+    context = {'is_logged': is_logged}
       
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -70,6 +85,11 @@ def signInHR(request):
         
         if user is not None:
             if user.check_password(password):
+                is_logged = True
+                
+                if request.POST.get('remember'):
+                    request.session.set_expiry(1209600)
+                    
                 messages.success(request, 'Signed in.')
                 return redirect('offers')
             else:
@@ -77,9 +97,14 @@ def signInHR(request):
         else:
             messages.warning(request, 'Email address is not signed up. Try again or sign up.')
     
-    return render(request, 'sign-in-hr.html')
+    return render(request, 'sign-in-hr.html', context)
+
 
 def signUp(request):
+    global is_logged
+    
+    context = {'is_logged': is_logged}
+    
     if request.method == 'POST':
         try:
             MyUser.objects.create_user(email=request.POST.get('email'), 
@@ -93,9 +118,14 @@ def signUp(request):
         except Exception as e:
             messages.warning(request, e)
         
-    return render(request, 'sign-up.html')
+    return render(request, 'sign-up.html', context)
+
 
 def signUpHR(request):
+    global is_logged
+    
+    context = {'is_logged': is_logged}
+    
     if request.method == 'POST':
         try:
             HR.objects.create_user(email=request.POST.get('email'), 
@@ -108,22 +138,31 @@ def signUpHR(request):
         except Exception as e:
             messages.warning(request, e)
     
-    return render(request, 'sign-up-hr.html')
+    return render(request, 'sign-up-hr.html', context)
+
 
 def manageAccount(request):
     global user
+    global is_logged
+    
+    context = {'user': user,
+               'is_logged': is_logged}
     
     if user is None:
         return redirect('accessDennied')
     else:
         pass
     
-    return render(request, 'manage-account.html')
+    return render(request, 'manage-account.html', context)
+
 
 def addOffer(request):
     global user
+    global is_logged
+    
     context = {'form': OfferForm(),
-               'user': user}
+               'user': user,
+               'is_logged': is_logged}
     
     if user is None:
         return redirect('accessDennied')
@@ -140,11 +179,15 @@ def addOffer(request):
     
     return render(request, 'add-offer.html', context)
 
+
 def signOut(request):
     global user
+    global is_logged
     user = None
+    is_logged = False
     
     return redirect('home')
+
 
 def accessDennied(request):
     return render(request, 'access-dennied.html')

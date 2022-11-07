@@ -2,7 +2,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-bk5sx)l@!*)03$4m&fzz7@d36lq%6zfzl%uy-_6qoa_7v+01iu'
-DEBUG = False 
+DEBUG = True 
 ALLOWED_HOSTS = ['joboard-klaudiusz.herokuapp.com', '127.0.0.1']
 
 INSTALLED_APPS = [

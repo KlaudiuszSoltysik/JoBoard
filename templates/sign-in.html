@@ -8,6 +8,12 @@
     {% csrf_token %}
     <input type="email" name="email" placeholder="Email address" class="form-control" autocomplete="off" autofocus style="margin-top: 0.4em; margin-bottom: 1em">
     <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="off" style="margin-top: 0.4em; margin-bottom: 1em">
+    <div class="form-check" style="text-align: left;">
+      <input class="form-check-input" type="checkbox" name="remember" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Remember me
+      </label>
+    </div>
     <input class="btn login_btn" type="submit" value="Sign in">
   </form>
   <h5>Forgot password? <a href="{% url 'signIn' %}">Reset</a></h5>

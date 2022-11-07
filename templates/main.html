@@ -46,7 +46,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'offers' %}">Job offers</a>
           </li>
-          {% if user is None %}
+          {% if not is_logged %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'signIn' %}">Sign in</a>
             </li>
