@@ -60,14 +60,14 @@
               <a class="nav-link" href="{% url 'signUpHR' %}">Sign up HR</a>
             </li>
           {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'manageAccount' %}">Manage account</a>
-            </li>
             {% if user.company %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'addOffer' %}">Add offer</a>
               </li>
             {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'manageAccount' %}">Manage account</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'signOut' %}">Sign out</a>
             </li>

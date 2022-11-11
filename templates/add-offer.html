@@ -1,5 +1,13 @@
-<form action="" method="POST">
-  {% csrf_token %}
-  {{ form }}
-  <input class="btn login_btn" type="submit" value="Sign in">
-</form>
+{% extends 'sign.html' %}
+{% block form %}
+
+<h1>Add offer</h1>
+<div class="form-group">
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn login_btn" type="submit" value="Add">
+  </form>
+</div>
+
+{% endblock %}

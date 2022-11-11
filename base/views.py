@@ -12,6 +12,7 @@ is_logged = False
 
 def home(request):
     global is_logged
+    global user
     
     try:
         response = requests.get("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=4e0ad1a0acb34407a06c85ae68a19813").json()['articles']
@@ -20,6 +21,7 @@ def home(request):
         response = []
         
     context = {'is_logged': is_logged,
+               'user': user,
                'response': response[0:5],
                'users_count': MyUser.objects.count,
                'offers_count': Offer.objects.count,
@@ -30,8 +32,10 @@ def home(request):
 
 def offers(request):
     global is_logged
+    global user
     
-    context = {'is_logged': is_logged}
+    context = {'is_logged': is_logged,
+               'user': user,}
     
     return render(request, 'offers.html', context)
 
@@ -128,9 +132,9 @@ def signUpHR(request):
     
     if request.method == 'POST':
         try:
-            HR.objects.create_user(email=request.POST.get('email'), 
-                                   company=request.POST.get('company'),   
-                                   password=request.POST.get('password'))   
+            HR.objects.create_user(email=request.POST.get('email'),
+                                   company=request.POST.get('company'), 
+                                   password=request.POST.get('password'))
                 
             messages.success(request, 'Account created successfully. Sign in to your new account.')
             return redirect('signIn')
@@ -142,11 +146,11 @@ def signUpHR(request):
 
 
 def manageAccount(request):
-    global user
     global is_logged
+    global user
     
-    context = {'user': user,
-               'is_logged': is_logged}
+    context = {'is_logged': is_logged,
+               'user': user,}
     
     if user is None:
         return redirect('accessDennied')
@@ -157,12 +161,12 @@ def manageAccount(request):
 
 
 def addOffer(request):
-    global user
     global is_logged
+    global user
     
     context = {'form': OfferForm(),
-               'user': user,
-               'is_logged': is_logged}
+               'is_logged': is_logged,
+               'user': user,}
     
     if user is None:
         return redirect('accessDennied')
@@ -172,6 +176,14 @@ def addOffer(request):
             form = OfferForm(request.POST)
             
             if form.is_valid():
+                Offer.objects.create(industry=request.POST.get('industry'),
+                                     salary=request.POST.get('salary'),
+                                     city=request.POST.get('city'),
+                                     company=request.POST.get('company'),
+                                     description=request.POST.get('description'),
+                                     email=request.POST.get('email'),
+                                     author=user)
+                
                 messages.success(request, 'Offer added.')
                 return redirect('offers')
             else:
@@ -181,10 +193,10 @@ def addOffer(request):
 
 
 def signOut(request):
-    global user
     global is_logged
-    user = None
+    global user
     is_logged = False
+    user = None
     
     return redirect('home')
 
