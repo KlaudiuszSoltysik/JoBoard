@@ -4,7 +4,15 @@ from .models import MyUser, HR, Offer
 from .forms import OfferForm
 import requests
 import random
+import re
 
+# reset password
+# google login
+# fb login
+# wiele stron ofert
+# licznik liter opisu
+# filtry
+# edycja konta
 
 user = None
 is_logged = False
@@ -34,8 +42,11 @@ def offers(request):
     global is_logged
     global user
     
+    offers = Offer.objects.all().values()
+    
     context = {'is_logged': is_logged,
-               'user': user,}
+               'user': user,
+               'offers': offers}
     
     return render(request, 'offers.html', context)
 
@@ -175,10 +186,14 @@ def addOffer(request):
             
             form = OfferForm(request.POST)
             
-            if form.is_valid():
-                Offer.objects.create(industry=request.POST.get('industry'),
+            if len(re.findall('\d+', request.POST.get('salary'))) != 1:
+                messages.warning(request, 'Salary field error.')
+                
+            elif form.is_valid():                
+                Offer.objects.create(position=request.POST.get('position'),
+                                     industry=request.POST.get('industry'),
                                      salary=request.POST.get('salary'),
-                                     city=request.POST.get('city'),
+                                     city=request.POST.get('city') if request.POST.get('city') else 'Remote',
                                      company=request.POST.get('company'),
                                      description=request.POST.get('description'),
                                      email=request.POST.get('email'),

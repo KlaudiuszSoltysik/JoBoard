@@ -35,16 +35,23 @@ class HR(AbstractBaseUser):
     
     
 class Offer(models.Model):
-    INDUSTRY_CHOICES = (('IT','IT'),
-                        ('Marketing', 'Marketing'),
+    INDUSTRY_CHOICES = (('Agriculture', 'Agriculture'),
                         ('Construction','Construction'),
-                        ('Engineering','Engineering'),
                         ('Education','Education'),
+                        ('Energy', 'Energy'),
+                        ('Engineering','Engineering'),
+                        ('Entertainment', 'Entertainment'),
+                        ('Fashion', 'Fashion'),
                         ('Finance', 'Finance'),
+                        ('Food', 'Food'),
                         ('Health care', 'Health care'),
+                        ('IT','IT'),
+                        ('Manufacturing', 'Manufacturing'),
+                        ('Marketing', 'Marketing'),
                         ('Media', 'Media'))
     
-    industry = models.CharField('Industry field', max_length=12, choices=INDUSTRY_CHOICES, default='Education')
+    position = models.CharField('Job position', max_length=70)
+    industry = models.CharField('Industry field', max_length=13, choices=INDUSTRY_CHOICES, default='Agriculture')
     salary = models.IntegerField('Salary', blank=True, null=True)
     city = models.CharField('City', max_length=30, blank=True, null=True)
     company = models.CharField('Company name', max_length=50)

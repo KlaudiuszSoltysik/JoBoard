@@ -179,6 +179,10 @@ $red: #e2474b;
   }
 }
 
-// #offers {
-
-// }
+#offers {
+  .container {
+    border-radius: 1em;
+    background-color: $beige;
+    width: 90%;
+  }
+}

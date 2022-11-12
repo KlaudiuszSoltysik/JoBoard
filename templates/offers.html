@@ -10,6 +10,23 @@
 	</div>
 	{% endfor %}
 	{% endif %}
+  
+	{% for offer in offers %}
+	<div class="container my-5 p-5 m-auto">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <h1>{{ offer.position }}</h1>
+        <h2>{{ offer.company }}</h2>
+		    <h2>{{ offer.city }}</h2>
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <h2>Industry: {{ offer.industry }}</h2>
+        <h2>Monthly salary: {{ offer.salary }} EUR</h2>
+		    <h2>Email: {{ offer.email }}</h2>
+      </div>
+    </div>
+	</div>
+	{% endfor %}
 </section>
 
 {% endblock %}
