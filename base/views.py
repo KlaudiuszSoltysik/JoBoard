@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .models import MyUser, HR, Offer
 from .forms import OfferForm
 import requests
@@ -42,11 +43,30 @@ def offers(request):
     global is_logged
     global user
     
-    offers = Offer.objects.all().values()
+    paginator = Paginator(Offer.objects.all(), 1)
+    page = request.GET.get('page')
+    offers = paginator.get_page(page)
+    
+    if offers.paginator.num_pages < 5:
+        page_numbers = range(1, offers.paginator.num_pages + 1)
+    else:
+        if offers.number < 3:
+            min = 1
+        else:
+            min = offers.number - 2
+        if offers.number > offers.paginator.num_pages - 2:
+            max = offers.paginator.num_pages + 1
+        else:
+            max = offers.number + 3
+            
+        page_numbers = list(range(min, max))
+        page_numbers.append('...')
+        page_numbers.append(offers.paginator.num_pages)
     
     context = {'is_logged': is_logged,
                'user': user,
-               'offers': offers}
+               'offers': offers,
+               'page_numbers': page_numbers}
     
     return render(request, 'offers.html', context)
 

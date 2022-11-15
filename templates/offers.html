@@ -3,30 +3,64 @@
 {% block content %}
 
 <section id="offers">
-	{% if messages %}
-	{% for message in messages %}
-	<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
-		{{ message }}
-	</div>
-	{% endfor %}
-	{% endif %}
-  
-	{% for offer in offers %}
-	<div class="container my-5 p-5 m-auto">
-    <div class="row">
-      <div class="col-lg-6 col-md-12 col-sm-12">
-        <h1>{{ offer.position }}</h1>
-        <h2>{{ offer.company }}</h2>
-		    <h2>{{ offer.city }}</h2>
-      </div>
-      <div class="col-lg-6 col-md-12 col-sm-12">
-        <h2>Industry: {{ offer.industry }}</h2>
-        <h2>Monthly salary: {{ offer.salary }} EUR</h2>
-		    <h2>Email: {{ offer.email }}</h2>
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <div class="row" style="margin: auto">
+    <div class="col-lg-3 col-md-4 col-sm-12">
+      <div class="container my-5 p-5 m-auto filters">
+
       </div>
     </div>
-	</div>
-	{% endfor %}
+    <div class="col-lg-9 col-md-8 col-sm-12">
+      <div class="offer-col">
+        {% for offer in offers %}
+        <div class="container my-5 p-5 m-auto offer" onclick="location.href='#';">
+          <div class="row" style="margin: auto">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <h1>{{ offer.position }}</h1>
+              <h2>{{ offer.company }}</h2>
+              <h2>{{ offer.city }}</h2>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <h2>Industry: {{ offer.industry }}</h2>
+              <h2>Monthly salary: {{ offer.salary }} EUR</h2>
+              <h2>Email: {{ offer.email }}</h2>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            {% if offers.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1" style="color: #406d96;">&laquo First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ offers.previous_page_number }}" style="color: #406d96;">Previous</a></li>
+            {% endif %}
+            {% for i in page_numbers %}
+            {% if offers.number == i %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}" style="color: #e2474b;">{{ i }}</a></li>
+            {% elif i == '...' %}
+            <li class="page-item"><a class="page-link" style="color: #406d96;">{{ i }}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}" style="color: #406d96;">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if offers.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ offers.next_page_number }}" style="color: #406d96;">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ offers.paginator.num_pages }}" style="color: #406d96;">Last &raquo</a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 {% endblock %}

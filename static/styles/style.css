@@ -137,8 +137,22 @@
   width: 80%;
 }
 
-#offers .container {
+#offers .offer {
   border-radius: 1em;
-  background-color: #dce2df;
+  background-color: #a7d0da;
   width: 90%;
+  cursor: pointer;
+}
+#offers .offer:hover {
+  background-color: #406d96;
+}
+#offers .filters {
+  border-radius: 1em;
+  background-color: #406d96;
+}
+@media all and (min-width: 769px) {
+  #offers .offer-col {
+    overflow-y: scroll !important;
+    height: 100vh !important;
+  }
 }/*# sourceMappingURL=style.css.map */

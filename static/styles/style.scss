@@ -180,9 +180,26 @@ $red: #e2474b;
 }
 
 #offers {
-  .container {
+  .offer {
     border-radius: 1em;
-    background-color: $beige;
+    background-color: $blue-2;
     width: 90%;
+    cursor: pointer;
+  }
+
+  .offer:hover {
+    background-color: $blue-3;
+  }
+
+  .filters {
+    border-radius: 1em;
+    background-color: $blue-3;
+  }
+
+  @media all and (min-width:769px) {
+    .offer-col {
+      overflow-y: scroll !important; 
+      height: 100vh !important;
+    }
   }
 }
