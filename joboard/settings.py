@@ -70,6 +70,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTH_USER_MODEL = 'base.MyUser'
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

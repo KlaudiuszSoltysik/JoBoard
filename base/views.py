@@ -1,19 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.forms import PasswordResetForm
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+
 from .models import MyUser, HR, Offer
-from .forms import OfferForm
+from .forms import OfferForm, MyUserPasswordResetForm
+
 import requests
 import random
 import re
 
-# reset password
 # google login
 # fb login
-# wiele stron ofert
-# licznik liter opisu
 # filtry
-# edycja konta
+# edycja konta, ogłoszeń
 
 user = None
 is_logged = False
@@ -181,7 +186,7 @@ def manageAccount(request):
     global user
     
     context = {'is_logged': is_logged,
-               'user': user,}
+               'user': user}
     
     if user is None:
         return redirect('accessDennied')
@@ -197,7 +202,7 @@ def addOffer(request):
     
     context = {'form': OfferForm(),
                'is_logged': is_logged,
-               'user': user,}
+               'user': user}
     
     if user is None:
         return redirect('accessDennied')
@@ -234,6 +239,35 @@ def signOut(request):
     user = None
     
     return redirect('home')
+
+
+def passwordReset(request):    
+    if request.method == "POST":
+        password_reset_form = MyUserPasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            user = MyUser.objects.get(email=password_reset_form.cleaned_data['email'])
+            if user:
+                subject = "Password Reset Requested"
+                email_template_name = "../templates/registration/password_reset_email.txt"
+                c = {'email': user.email,
+                    'domain':'127.0.0.1:8000',
+                    'site_name': 'JoBoard',
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'user': user,
+                    'token': default_token_generator.make_token(user),
+                    'protocol': 'http'}
+                email = render_to_string(email_template_name, c)
+                try:
+                    send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+                    messages.success(request, f'Email sent. Check your {user.email} inbox.')
+                except:
+                    messages.warning(request, 'Something went wrong.')
+            else:
+                messages.warning(request, f'User {user.email} does not exist.')
+            return redirect ("/password_reset/done/")
+     
+    password_reset_form = MyUserPasswordResetForm()
+    return render(request, '../templates/registration/password_reset.html', context={'password_reset_form': password_reset_form})
 
 
 def accessDennied(request):

@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views 
 
 from . import views
 
@@ -13,5 +14,6 @@ urlpatterns = [
     path('manage-account/', views.manageAccount, name='manageAccount'),
     path('add-offer/', views.addOffer, name='addOffer'),
     path('sign-out/', views.signOut, name='signOut'),
+    path('password-reset/', views.passwordReset, name='passwordReset'),
     path('access-dennied/', views.accessDennied, name='accessDennied')
 ]
