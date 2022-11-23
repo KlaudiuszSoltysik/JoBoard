@@ -20,7 +20,7 @@
     <div class="col-lg-9 col-md-8 col-sm-12">
       <div class="offer-col">
         {% for offer in offers %}
-        <div class="container my-5 p-5 m-auto offer" onclick="location.href='#';">
+        <div class="container my-5 p-5 m-auto offer" onclick="location.href='/offer/{{ offer.id }}';">
           <div class="row" style="margin: auto">
             <div class="col-lg-6 col-md-12 col-sm-12">
               <h1>{{ offer.position }}</h1>

@@ -155,4 +155,34 @@
     overflow-y: scroll !important;
     height: 100vh !important;
   }
+}
+
+#account {
+  text-align: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin: 0;
+  background-color: #a7d0da;
+}
+#account button {
+  margin: 0.5em;
+}
+#account .offer {
+  border-radius: 1em;
+  background-color: #dce2df;
+  width: 90%;
+}
+
+#offer {
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin: 0;
+  background-color: #a7d0da;
+}
+#offer h1 {
+  font-size: 6em;
 }/*# sourceMappingURL=style.css.map */

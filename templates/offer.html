@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section id="offer">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <h1>{{ offer.position }}</h1><hr>
+  <h2>Industry: {{ offer.industry }}</h2><hr>
+  <h2>City: {{ offer.city }}</h2><hr>
+  <h2>Company: {{ offer.company }}</h2><hr>
+  <h2>Salary: {{ offer.salary }} EUR/month</h2><hr>
+  <h2>Description:</h2>
+  <h3>{{ offer.description|linebreaks }}</h3><hr>
+  <h2>Contact: {{ offer.email }}</h2>
+</section>
+
+{% endblock %}

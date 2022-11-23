@@ -48,7 +48,7 @@ def offers(request):
     global is_logged
     global user
     
-    paginator = Paginator(Offer.objects.all(), 1)
+    paginator = Paginator(Offer.objects.all(), 5)
     page = request.GET.get('page')
     offers = paginator.get_page(page)
     
@@ -186,7 +186,8 @@ def manageAccount(request):
     global user
     
     context = {'is_logged': is_logged,
-               'user': user}
+               'user': user,
+               'offers': Offer.objects.filter(author_id=user.id)}
     
     if user is None:
         return redirect('accessDennied')
@@ -195,6 +196,16 @@ def manageAccount(request):
     
     return render(request, 'manage-account.html', context)
 
+
+def offer(request, pk):
+    global is_logged
+    global user
+    
+    context = {'is_logged': is_logged,
+               'user': user,
+               'offer': Offer.objects.filter(id=pk)[0]}
+    
+    return render(request, 'offer.html', context)
 
 def addOffer(request):
     global is_logged
@@ -230,7 +241,7 @@ def addOffer(request):
                 messages.warning(request, 'Something went wrong.')
     
     return render(request, 'add-offer.html', context)
-
+    
 
 def signOut(request):
     global is_logged

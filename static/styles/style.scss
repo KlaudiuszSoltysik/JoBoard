@@ -186,11 +186,10 @@ $red: #e2474b;
     width: 90%;
     cursor: pointer;
   }
-
+  
   .offer:hover {
     background-color: $blue-3;
   }
-
   .filters {
     border-radius: 1em;
     background-color: $blue-3;
@@ -202,4 +201,37 @@ $red: #e2474b;
       height: 100vh !important;
     }
   }
+}
+
+#account {
+  text-align: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin: 0;
+  background-color: $blue-2;
+  
+  button {
+    margin: 0.5em;
+  }
+
+  .offer {
+    border-radius: 1em;
+    background-color: $beige;
+    width: 90%;
+  }
+}
+
+#offer {
+  h1 {
+    font-size: 6em;
+  }
+
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin: 0;
+  background-color: $blue-2;
 }
