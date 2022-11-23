@@ -1,4 +1,6 @@
 {% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
 
 {% block content %}
 
@@ -14,7 +16,19 @@
   <div class="row" style="margin: auto">
     <div class="col-lg-3 col-md-4 col-sm-12">
       <div class="container my-5 p-5 m-auto filters">
-
+        <form action="{% url 'offers' %}" method="POST">
+          {% csrf_token %}
+          <label for="sort" style="margin-bottom: 6px;">Sort by:</label>
+          <select class="form-select" id="sort" name="sort"  onchange="this.form.submit()" style="margin-bottom: 20px;">
+            <option selected=>---------</option>
+            <option value="salary">Salary</option>
+            <option value="position">Alphabetically</option>
+          </select>
+        </form>
+        <form method="GET">
+            {{ offer_filter.form|crispy }}
+          <input class="btn btn-danger btn-lg" type="submit" value="Submit">
+        </form>
       </div>
     </div>
     <div class="col-lg-9 col-md-8 col-sm-12">

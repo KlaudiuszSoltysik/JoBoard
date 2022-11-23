@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 
 from .models import MyUser, HR, Offer
 from .forms import OfferForm, MyUserPasswordResetForm
+from .filters import OfferFilter
 
 import requests
 import random
@@ -48,7 +49,14 @@ def offers(request):
     global is_logged
     global user
     
-    paginator = Paginator(Offer.objects.all(), 5)
+    sort = request.POST.get('sort')
+    
+    if sort:
+        offer_filter = OfferFilter(request.GET, queryset=Offer.objects.all().order_by(sort).values())
+    else:
+        offer_filter = OfferFilter(request.GET, queryset=Offer.objects.all())
+    
+    paginator = Paginator(offer_filter.qs, 5)
     page = request.GET.get('page')
     offers = paginator.get_page(page)
     
@@ -71,6 +79,7 @@ def offers(request):
     context = {'is_logged': is_logged,
                'user': user,
                'offers': offers,
+               'offer_filter': offer_filter,
                'page_numbers': page_numbers}
     
     return render(request, 'offers.html', context)
