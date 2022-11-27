@@ -18,8 +18,7 @@ import re
 
 # google login
 # fb login
-# filtry
-# edycja konta, ogłoszeń
+# edycja konta, kasowanie konta, kasowanie ogłoszeń
 
 user = None
 is_logged = False
@@ -80,7 +79,8 @@ def offers(request):
                'user': user,
                'offers': offers,
                'offer_filter': offer_filter,
-               'page_numbers': page_numbers}
+               'page_numbers': page_numbers,
+               'sort': sort}
     
     return render(request, 'offers.html', context)
 
@@ -216,6 +216,7 @@ def offer(request, pk):
     
     return render(request, 'offer.html', context)
 
+
 def addOffer(request):
     global is_logged
     global user
@@ -250,7 +251,45 @@ def addOffer(request):
                 messages.warning(request, 'Something went wrong.')
     
     return render(request, 'add-offer.html', context)
+
+
+def editOffer(request, pk):
+    global is_logged
+    global user
     
+    offer = Offer.objects.get(id=pk)
+    
+    context = {'form': OfferForm(instance=offer),
+               'is_logged': is_logged,
+               'user': user}
+    
+    if user is None:
+        return redirect('accessDennied')
+    else:
+        if request.method == 'POST':
+            
+            form = OfferForm(request.POST, instance=offer)
+            
+            if len(re.findall('\d+', request.POST.get('salary'))) != 1:
+                messages.warning(request, 'Salary field error.')
+                
+            elif form.is_valid():     
+                offer.position = request.POST.get('position')
+                offer.industry = request.POST.get('industry')
+                offer.salary = request.POST.get('salary')
+                offer.city = request.POST.get('city') if request.POST.get('city') else 'Remote'
+                offer.company = request.POST.get('company')
+                offer.description = request.POST.get('description')
+                offer.email = request.POST.get('email')       
+                offer.save()
+                
+                messages.success(request, 'Changes saved.')
+                return redirect('manageAccounts')
+            else:
+                messages.warning(request, 'Something went wrong.')
+    
+    return render(request, 'edit-offer.html', context)
+
 
 def signOut(request):
     global is_logged

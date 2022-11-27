@@ -20,9 +20,19 @@
           {% csrf_token %}
           <label for="sort" style="margin-bottom: 6px;">Sort by:</label>
           <select class="form-select" id="sort" name="sort"  onchange="this.form.submit()" style="margin-bottom: 20px;">
-            <option selected=>---------</option>
+            {% if sort == "salary" %}
+            <option value="id">---------</option>
+            <option selected="selected" value="salary">Salary</option>
+            <option value="position">Alphabetically</option>
+            {% elif sort == "position" %}
+            <option value="id">---------</option>
+            <option value="salary">Salary</option>
+            <option selected="selected" value="position">Alphabetically</option>
+            {% else %}
+            <option selected="selected" value="id">---------</option>
             <option value="salary">Salary</option>
             <option value="position">Alphabetically</option>
+            {% endif %}
           </select>
         </form>
         <form method="GET">

@@ -1,0 +1,23 @@
+{% extends 'sign.html' %}
+{% load static %}
+
+{% block form %}
+
+<h1>Edit offer</h1>
+<div class="form-group">
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.position }}
+    {{ form.industry }}
+    {{ form.salary }}
+    {{ form.city }}
+    {{ form.company }}
+    {{ form.description }}
+    <p id="length-counter">5000/5000</p>
+    {{ form.email }}
+    <input class="btn login_btn" type="submit" value="Save changes">
+  </form>
+</div>
+
+<script src="{% static 'javascript/add-offer.js' %}"></script> 
+{% endblock %}

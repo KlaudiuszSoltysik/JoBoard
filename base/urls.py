@@ -12,6 +12,7 @@ urlpatterns = [
     path('sign-up-hr/', views.signUpHR, name='signUpHR'),
     path('manage-account/', views.manageAccount, name='manageAccount'),
     path('add-offer/', views.addOffer, name='addOffer'),
+    path('edit-offer/<str:pk>/', views.editOffer, name='editOffer'),
     path('offer/<str:pk>/', views.offer, name='offer'),
     path('sign-out/', views.signOut, name='signOut'),
     path('password-reset/', views.passwordReset, name='passwordReset'),

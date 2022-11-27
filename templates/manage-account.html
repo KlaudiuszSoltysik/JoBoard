@@ -10,37 +10,39 @@
   </div>
   {% endfor %}
   {% endif %}
-
-    <h1>Account details:</h1>
-    <h4>Name: {{ user.first_name }} {{ user.last_name }}</h4>
-    <h4>Email address: {{ user.email }}</h4>
-    {% if user.company %}
-    <h4>Company name: {{ user.company }}</h4>
-    <h4>Company description:<br>{{ user.description }}</h4>
-    <h4>URL address: {{ user.url }}</h4>
-    {% endif %}
-    <button type="button" class="btn btn-primary btn-lg btn-block">Change password</button>
-    <button type="button" class="btn btn-primary btn-lg btn-block">Edit account</button>
-    <button type="button" class="btn btn-danger btn-lg btn-block">Delete account</button><br>
-    {% for offer in offers %}
-        <div class="container my-5 p-5 m-auto offer">
-          <div class="row" style="margin: auto">
-            <div class="col-lg-6 col-md-12 col-sm-12">
-              <h1>{{ offer.position }}</h1>
-              <h2>{{ offer.company }}</h2>
-              <h2>{{ offer.city }}</h2>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12">
-              <h2>Industry: {{ offer.industry }}</h2>
-              <h2>Monthly salary: {{ offer.salary }} EUR</h2>
-              <h2>Email: {{ offer.email }}</h2>
-            </div>
-          </div>
-          <button type="button" class="btn btn-primary btn-lg btn-block">View</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block">Edit</button>
-          <button type="button" class="btn btn-danger btn-lg btn-block">Delete</button>
-        </div>
-        {% endfor %}
+  <h1>Account details:</h1>
+  {% if not user.company %}
+  <h4>Name: {{ user.first_name }} {{ user.last_name }}</h4>
+  {% endif %}
+  <h4>Email address: {{ user.email }}</h4>
+  {% if user.company %}
+  <h4>Company name: {{ user.company }}</h4>
+  <h4>Company description:<br>{{ user.description }}</h4>
+  <h4>URL address: {{ user.url }}</h4>
+  {% endif %}
+  <button type="button" class="btn btn-primary btn-lg" style="width: 10em;">Edit account</button>
+  <button type="button" class="btn btn-danger btn-lg" style="width: 10em;">Delete account</button><br>
+  {% for offer in offers %}
+  <div class="container my-5 p-5 m-auto offer">
+    <div class="row" style="margin: auto">
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <h1>{{ offer.position }}</h1>
+        <h2>{{ offer.company }}</h2>
+        <h2>{{ offer.city }}</h2>
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <h2>Industry: {{ offer.industry }}</h2>
+        <h2>Monthly salary: {{ offer.salary }} EUR</h2>
+        <h2>Email: {{ offer.email }}</h2>
+      </div>
+    </div>
+    <a role="button" class="btn btn-primary btn-lg" href="/offer/{{ offer.id }}"
+      style="margin: 0.5em; width: 5em;">View</a>
+    <a role="button" class="btn btn-primary btn-lg" href="/edit-offer/{{ offer.id }}"
+      style="margin: 0.5em; width: 5em;">Edit</a>
+    <a role="button" class="btn btn-danger btn-lg" style="margin: 0.5em; width: 5em;">Delete</a>
+  </div>
+  {% endfor %}
 </section>
 
 {% endblock %}
