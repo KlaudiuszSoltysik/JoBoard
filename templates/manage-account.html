@@ -3,24 +3,18 @@
 {% block content %}
 
 <section id="account">
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
-    {{ message }}
-  </div>
-  {% endfor %}
-  {% endif %}
   <h1>Account details:</h1>
   {% if not user.company %}
-  <h4>Name: {{ user.first_name }} {{ user.last_name }}</h4>
+  <br><h4>Name: {{ user.first_name }} {{ user.last_name }}</h4>
   {% endif %}
-  <h4>Email address: {{ user.email }}</h4>
+  <br><h4>Email address: {{ user.email }}</h4>
   {% if user.company %}
-  <h4>Company name: {{ user.company }}</h4>
-  <h4>Company description:<br>{{ user.description }}</h4>
-  <h4>URL address: {{ user.url }}</h4>
+  <br><h4>Company name: {{ user.company }}</h4>
+  <br><h4>Company description:<br>{{ user.description }}</h4>
+  <br><h4>URL address:</h4>
+  <h4><a href="{{ user.url }}">{{ user.url }}</a></h4>
   {% endif %}
-  <button type="button" class="btn btn-primary btn-lg" style="width: 10em;">Edit account</button>
+  <br><a role="button" class="btn btn-primary btn-lg" href="{% url 'editAccount' %}" style="width: 10em;">Edit account</a>
   <button type="button" class="btn btn-danger btn-lg" style="width: 10em;">Delete account</button><br>
   {% for offer in offers %}
   <div class="container my-5 p-5 m-auto offer">

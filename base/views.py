@@ -18,7 +18,7 @@ import re
 
 # google login
 # fb login
-# edycja konta, kasowanie konta, kasowanie ogłoszeń
+# kasowanie konta, kasowanie ogłoszeń
 
 user = None
 is_logged = False
@@ -200,10 +200,8 @@ def manageAccount(request):
     
     if user is None:
         return redirect('accessDennied')
-    else:
-        pass
-    
-    return render(request, 'manage-account.html', context)
+    else:   
+        return render(request, 'manage-account.html', context)
 
 
 def offer(request, pk):
@@ -257,8 +255,6 @@ def editOffer(request, pk):
     global is_logged
     global user
     
-    offer = Offer.objects.get(id=pk)
-    
     context = {'form': OfferForm(instance=offer),
                'is_logged': is_logged,
                'user': user}
@@ -300,7 +296,7 @@ def signOut(request):
     return redirect('home')
 
 
-def passwordReset(request):    
+def passwordReset(request):   
     if request.method == "POST":
         password_reset_form = MyUserPasswordResetForm(request.POST)
         if password_reset_form.is_valid():
@@ -327,6 +323,36 @@ def passwordReset(request):
      
     password_reset_form = MyUserPasswordResetForm()
     return render(request, '../templates/registration/password_reset.html', context={'password_reset_form': password_reset_form})
+
+
+def editAccount(request):
+    global is_logged
+    global user
+    
+    context = {'is_logged': is_logged,
+               'user': user}
+    
+    if user is None:
+        return redirect('accessDennied')
+    
+    elif request.method == 'POST':
+        if request.POST.get('password'):
+            user.set_password(request.POST.get('password'))
+        if request.POST.get('description'):
+            user.description = request.POST.get('description')
+        if request.POST.get('url'):
+            user.url = request.POST.get('url')
+        if request.POST.get('company'):
+            user.company = request.POST.get('company')
+        if request.POST.get('first_name'):
+            user.first_name = request.POST.get('first_name')
+        if request.POST.get('last_name'):
+            user.last_name = request.POST.get('last_name')
+            
+        user.save()
+        return redirect('manageAccount')
+    
+    return render(request, 'edit-account.html', context)
 
 
 def accessDennied(request):
