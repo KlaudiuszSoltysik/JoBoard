@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.contrib.auth.forms import PasswordResetForm
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -18,7 +17,7 @@ import re
 
 # google login
 # fb login
-# kasowanie konta, kasowanie ogłoszeń
+# kasowanie konta, kasowanie ogłoszeń, sortowanie kasuje filtry
 
 user = None
 is_logged = False
@@ -255,6 +254,8 @@ def editOffer(request, pk):
     global is_logged
     global user
     
+    offer = Offer.objects.filter(id=pk).first()
+    
     context = {'form': OfferForm(instance=offer),
                'is_logged': is_logged,
                'user': user}
@@ -280,7 +281,7 @@ def editOffer(request, pk):
                 offer.save()
                 
                 messages.success(request, 'Changes saved.')
-                return redirect('manageAccounts')
+                return redirect('manageAccount')
             else:
                 messages.warning(request, 'Something went wrong.')
     

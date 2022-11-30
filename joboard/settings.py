@@ -1,9 +1,8 @@
 from pathlib import Path
-import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-bk5sx)l@!*)03$4m&fzz7@d36lq%6zfzl%uy-_6qoa_7v+01iu'
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['joboard-klaudiusz.herokuapp.com', '127.0.0.1']
 
 INSTALLED_APPS = [
@@ -20,7 +19,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,7 +81,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
