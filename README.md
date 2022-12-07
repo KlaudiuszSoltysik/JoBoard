@@ -1,7 +1,6 @@
 # JoBoard:  
 A website where you can search for a job or post an advertisement. Made by me using Django, HTML, SASS, Bootstrap and JavaScript.
-# Demonstration:  
-The website is finished, everything you see is fully working.    
+# Demonstration:   
 ## Homepage:    
 News part API providing with latest business news.    
     
