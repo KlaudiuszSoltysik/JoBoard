@@ -2,16 +2,16 @@
 A website where you can search for a job or post an advertisement. Made by me using Django, HTML, SASS, Bootstrap and JavaScript.
 # Demonstration:  
 ## Functions:
--user can sign in, log in, log out and change his password   
--remember me checkbox    
--user can reset password, via email message using link with token leding to change password subpage    
--user can't access some of subpages if isn't logged        
--2 different types of users have separate roles and can view different subpages        
--depending on role user can add offers with job         
--user can edit or delete his account and offers     
--pop-up messages inform about successfully added offer, logging in etc.    
--filters and sorting offers    
--required and non-required fields in databases    
+- user can sign in, log in, log out and change his password   
+- remember me checkbox    
+- user can reset password, via email message using link with token leding to change password subpage    
+- user can't access some of subpages if isn't logged        
+- 2 different types of users have separate roles and can view different subpages        
+- depending on role user can add offers with job         
+- user can edit or delete his account and offers     
+- pop-up messages inform about successfully added offer, logging in etc.    
+- filters and sorting offers    
+- required and non-required fields in databases    
 ## Homepage:    
 News part API providing with latest business news.    
     
